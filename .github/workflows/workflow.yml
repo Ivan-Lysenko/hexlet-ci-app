@@ -8,9 +8,19 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
+              with:
+                cache: 'npm'
             - name: setup
               run: make setup
             - name: test
               run: make test
             - name: linter
               run: make lint
+    security:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Run Snyk to check for vulnerabilities
+              uses: snyk/actions/node@master
+              env:
+                SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
