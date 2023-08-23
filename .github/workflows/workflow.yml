@@ -7,8 +7,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
             - name: setup
               run: make setup
+            - name: start
+              run: make start  
             - name: test
               run: make test
             - name: linter
